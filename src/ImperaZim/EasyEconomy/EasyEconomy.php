@@ -10,7 +10,7 @@ use ImperaZim\EasyEconomy\Functions\DataBase\DataBase;
 
 class EasyEconomy extends PluginBase {
  
- public $DEFAULT_MONEY = 3000;
+ public $DEFAULT_MONEY = 1000;
  public static EasyEconomy $instance;
 
  public static function getInstance() : EasyEconomy {
