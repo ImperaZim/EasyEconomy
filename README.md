@@ -18,9 +18,9 @@ This plugin is meant to be used on servers made only in the software **[PocketMi
 - /money take (player) (value) 
 
 ## EasyEconomy API
+> API Interface [ProvinderBase](https://github.com/ImperaZim/EasyEconomy/blob/main/src/ImperaZim/EasyEconomy/Functions/DataBase/ProvinderBase.php)
 ```php 
 use ImperaZim\EasyEconomy\EasyEconomy;
 $api = EasyEconomy::getInstance()->getProvinder();
-$api->getMoney($player); // return player balance
 ```
  
