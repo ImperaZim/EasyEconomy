@@ -12,6 +12,7 @@ class TopCommand {
  public function __construct($cmd, CommandSender $player, array $args) {
   $id = 1;
   $message = "";
+  $row = $args[1];
   $plugin = $cmd->getOwningPlugin();
   $provinder = $plugin->getProvinder();
   foreach ($provinder->getAllInOrder() as $data) {
