@@ -2,7 +2,7 @@ name: EasyEconomy
 author: ImperaZim // jsjdjd
 version: 1.0.0
 api: 4.0.0
-main: ImperaZim\EasyEconomy\EasyEconomy
+main: ImperaZim\EasyEconomy\Loader
 
 permissions:
  easyeconomy.give.use:
