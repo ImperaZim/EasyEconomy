@@ -1,0 +1,13 @@
+name: EasyEconomy
+author: ImperaZim // jsjdjd
+version: 1.0.0
+api: 4.0.0
+main: ImperaZim\EasyEconomy\EasyEconomy
+
+permissions:
+ easyeconomy.give.use:
+  default: op
+ easyeconomy.set.use:
+  default: op
+ easyeconomy.take.use:
+  default: op
