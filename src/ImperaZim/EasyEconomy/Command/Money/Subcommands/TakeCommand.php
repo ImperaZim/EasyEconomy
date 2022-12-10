@@ -9,7 +9,7 @@ use ImperaZim\EasyEconomy\PluginUtils;
 
 class TakeCommand {
  
- public function __construct(Command $cmd, CommandSender $player, array $args) {
+ public function __construct($cmd, CommandSender $player, array $args) {
   if (!isset($args[2])) {
    $player->sendMessage(PluginUtils::convertString([], [], "{prefix} §7Use /money take (player) (value)"));
    return;
