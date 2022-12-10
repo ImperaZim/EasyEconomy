@@ -7,12 +7,12 @@ This plugin is meant to be used on servers made only in the software **[PocketMi
 ## Main Command:
 - /money [args...]
 
-## Default Subcommands:
+### Default Subcommands:
 - /money ``optional (player)``
 - /money pay (player) (value)
 - /money top
 
-## Operator Subcommands:
+### Operator Subcommands:
 - /money set (player) (value)
 - /money give (player) (value) 
 - /money take (player) (value) 
