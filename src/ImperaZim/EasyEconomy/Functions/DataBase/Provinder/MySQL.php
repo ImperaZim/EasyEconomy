@@ -9,16 +9,12 @@ class MySQL implements \ImperaZim\EasyEconomy\Functions\DataBase\ProvinderBase {
  
  public function table() {
   $config = DataBase::getInstance()->getConfig()->get("database-provider", []);
-		$db = new \mysqli(
+		return new \mysqli(
 			$config["host"] ?? "51.81.47.131",
 			$config["user"] ?? "u720_m5HkgVNSm8",
 			$config["password"] ?? "dZJBsc=3Fno@OsWpY3dB+zpp",
 			$config["db"] ?? "s720_easyeconomy",
 			$config["port"] ?? 3306);
- 		if($db->connect_error){
- 			$this->plugin->getLogger()->critical("Could not connect to MySQL server: ".$db->connect_error);
- 		}
- 		return $db;
  }
   
  public function createTable() {
@@ -35,8 +31,7 @@ class MySQL implements \ImperaZim\EasyEconomy\Functions\DataBase\ProvinderBase {
  
  public function exist(Player $player) {
   $data = self::table();
-  $name = $player->getName();
- 	$result = $data->query("SELECT * FROM profile WHERE name = '$name'");
+ 	$result = $data->query("SELECT * FROM profile WHERE name='".$this->table()->real_escape_string($player->getName())."'");
  	return $result->num_rows > 0 ? true : false;
  }
  
@@ -52,7 +47,7 @@ class MySQL implements \ImperaZim\EasyEconomy\Functions\DataBase\ProvinderBase {
  
  public function setMoney(Player $player, Int $value) {
   if ($this->exist($player)) {
-   $this->table()->query("UPDATE profile SET money = $value WHERE name='".$this->db->real_escape_string($player->getName())."'"); 
+   $this->table()->query("UPDATE profile SET money = $value WHERE name='".$this->table()->real_escape_string($player->getName())."'"); 
    return true;
   }
   return false;
@@ -60,7 +55,7 @@ class MySQL implements \ImperaZim\EasyEconomy\Functions\DataBase\ProvinderBase {
  
  public function addMoney(Player $player, Int $value) {
   if ($this->exist($player)) {
-   $this->table()->query("UPDATE profile SET money = money + $value WHERE name='".$this->db->real_escape_string($player->getName())."'");
+   $this->table()->query("UPDATE profile SET money = money + $value WHERE name='".$this->table()->real_escape_string($player->getName())."'");
    return true;
   }
   return false;
@@ -69,9 +64,9 @@ class MySQL implements \ImperaZim\EasyEconomy\Functions\DataBase\ProvinderBase {
  public function reduceMoney(Player $player, Int $value) {
   if ($this->exist($player)) {
    if ($this->getMoney($player) < $value) {
-    $this->table()->query("UPDATE profile SET money = 0 WHERE name='".$this->db->real_escape_string($player->getName())."'"); 
+    $this->table()->query("UPDATE profile SET money = 0 WHERE name='".$this->table()->real_escape_string($player->getName())."'"); 
    }else{
-    $this->table()->query("UPDATE profile SET money = money - $value WHERE name='".$this->db->real_escape_string($player->getName())."'");
+    $this->table()->query("UPDATE profile SET money = money - $value WHERE name='".$this->table()->real_escape_string($player->getName())."'");
    }
    return true;
   }
