@@ -9,7 +9,7 @@ use ImperaZim\EasyEconomy\PluginUtils;
 
 class TopCommand {
  
- public function __construct(Command $cmd, CommandSender $player, array $args) {
+ public function __construct($cmd, CommandSender $player, array $args) {
   $id = 1;
   $message = "";
   $plugin = $cmd->getOwningPlugin();
