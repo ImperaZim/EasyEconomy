@@ -1,0 +1,35 @@
+
+# ==================== #
+prefix: "§l§eECONOMY§r"
+# ==================== #
+
+# Messages
+commands:
+  no-permission: "{perfix} §7You are not allowed to do this!"
+  mymoney:
+    successfully: "{prefix} §7You has {money} $ of money!"
+  seemoney: 
+    successfully: "{prefix} §7The player {player} has {money} $ of money!"
+    invalid_player: "{prefix} §7The player {player} is not online!"
+  givemoney: 
+    invalid_player: "{prefix} §7The player {player} is not online!"
+    successfully_gave_money: "{prefix} §7You gave {money} $ to player {player}!"
+    successfully_given_money: "{prefix} §7You won {money} $!"
+  setmoney: 
+    invalid_player: "{prefix} §7The player {player} is not online!"
+    successfully_set_money: "{prefix} §7You set player {player}'s money to {money} $!"
+    successfully_res_money: "{prefix} §7Your money was set to {money} $!"
+  moneypay:
+    invalid_number: "{prefix} §7Invalid number!"
+    invalid_player: "{prefix} §7The player {player} is not online!" 
+    Insufficient_money: "{prefix} §7Your money is less than what you want to send!" 
+    money_successfully_sent: "{prefix} §7You sent {money} $ to player {player}!"
+    money_successfully_received: "{prefix} §7You received {money} $ from player {player}!"
+  takemoney: 
+    invalid_number: "{prefix} §7Invalid number!"
+    invalid_player: "{prefix} §7The player {player} is not online!"
+    successfully_reduce_money: "{prefix} §7You reduced {money} $ to player {player}!"
+    successfully_reduced_money: "{prefix} §7You lost {money} $!" 
+  topmoney:
+    title_preset: "{prefix} §7Players leaderboard: \n {place_preset}"
+    place_preset: "§e{id}° §7{player} -§a {money} $"
