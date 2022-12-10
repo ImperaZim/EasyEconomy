@@ -1,4 +1,5 @@
 # EasyEconomy
+![EasyEconomy](https://media.discordapp.net/attachments/1049752404284952668/1051260462983020684/EasyEconomy.png) 
 An easy to use and understand economy plugin for minecraft bedrock edition servers!
 - - - -
 ## Compatibility 
