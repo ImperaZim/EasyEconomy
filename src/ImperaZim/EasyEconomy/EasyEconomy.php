@@ -16,17 +16,18 @@ class EasyEconomy extends PluginBase {
  public static function getInstance() : EasyEconomy {
   return self::$instance;
  }
-
- public function onLoad() : void {
-  self::$instance = $this; 
- }  
  
  public function onEnable() : void {
+  self::$instance = $this; 
+  $this->loadAll();
+ }
+ 
+ public function loadAll() : void {
   if(DataBase::checkType()) {
    Events::registerAll();
    Commands::registerAll();
    $this->saveResource('messages.yml');
-  }
+  } 
  }
  
  public function getMessages() : Config {
