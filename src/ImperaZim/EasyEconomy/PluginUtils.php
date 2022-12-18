@@ -13,7 +13,7 @@ class PluginUtils extends EasyEconomy {
   if ($value > self::getMaxCurrency()) {
    return number_format($value);
   } 
-  if ($value > 1000) {
+  if ($value > 999) {
    $x = round($value);
    $x_number_format = number_format($x);
    $x_array = explode(',', $x_number_format);
