@@ -3,12 +3,14 @@
 namespace ImperaZim\EasyEconomy;
 
 use pocketmine\utils\Config;
+use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use ImperaZim\EasyEconomy\Event\Events;
 use ImperaZim\EasyEconomy\Command\Commands;
+use pocketmine\event\plugin\PluginEnableEvent; 
 use ImperaZim\EasyEconomy\Functions\DataBase\DataBase;
 
-class EasyEconomy extends PluginBase {
+class EasyEconomy extends PluginBase implements Listener {
  
  public $DEFAULT_MONEY = 1000;
  public static EasyEconomy $instance;
@@ -19,10 +21,10 @@ class EasyEconomy extends PluginBase {
  
  public function onEnable() : void {
   self::$instance = $this; 
-  $this->loadAll();
+  $this->getServer()->getPluginManager()->registerEvents($this, $this); 
  }
  
- public function loadAll() : void {
+ public function PluginEnable(PluginEnableEvent $event) {
   if(DataBase::checkType()) {
    Events::registerAll();
    Commands::registerAll();
