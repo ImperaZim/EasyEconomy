@@ -1,5 +1,19 @@
-name: EasyEconomyTycoonAddon
+name: EasyEconomy
 author: ImperaZim
-version: 1.0.0
+version: 2.0.0
 api: 5.0.0
-main: ImperaZim\EasyEconomy\EasyEconomyTycoonAddon
+main: ImperaZim\EasyEconomy\EasyEconomy
+
+permissions:
+ easyeconomy.command:
+  default: true
+ easyeconomy.command.pay:
+  default: true
+ easyeconomy.command.see:
+  default: true
+ easyeconomy.command.set:
+  default: op
+ easyeconomy.command.give:
+  default: op
+ easyeconomy.command.top:
+  default: true

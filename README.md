@@ -1,18 +1,31 @@
-# EE TycoonAddon
-EasyEconomyTycoonAddon is an add-on to perform certain actions when the richest
-player on the list is changed to
-the [EasyEconomy](https://github.com/ImperaZim/EasyEconomy) plug-in for the
-Minecraft server software: [PocketMine-MP](https://github.com/pmmp/PocketMine-MP
-).
+# <h3 align="center">EasyEconomy v2.0.0</h3>
+<div align="center">
+  
+![EasyEconomy](https://raw.githubusercontent.com/ImperaZim/EasyEconomy/main/coin_frame_1.gif)
 
-## Features
-Because the EasyEconomy plugin provides a detailed list of the richest players
-in order, the addon can identify updates in the list and send an update event
-where it updates the nametag of the players and adds an extra tag to the richest
-player!
+</div>
+
+<p align="center">EasyEconomy is a simple to use economy plugin that provides an economy system for your minecraft server.</p>
+
+- - - -
+## Software support
+**[EasyEconomy](https://github.com/ImperaZim/EasyEconomy)** is a PHP plugin for **[PocketMine-MP](https://github.com/pmmp/PocketMine-MP )**, designed specifically for versions 5.0 and higher.  It may not work on older versions or other webserver APIs! 
+
+## Addons
+- [EasyEconomyTycoonAddon](https://github.com/ImperaZim/EasyEconomyTycoonAddon):
+It is an add-on to perform certain actions when the player is richer and changed.
 
 ## For developers
-### EasyEconomyTycoonAddon's events
-EasyEconomyTycoonAddon provides a number of events that can be used to hook into the plugin's code. Currently, the following events can be used:
--  [TycoonUpdateEvent](https://github.com/ImperaZim/EasyEconomyTycoonAddon/blob/main/src/ImperaZim/EasyEconomy/event/TycoonUpdateEvent.php):
-**Always** called when the **richest** player on the server is changed
+
+### EasyEconomy API
+Use [Provider.php](https://github.com/ImperaZim/EasyEconomy/blob/main/src/ImperaZim/EasyEconomy/provider/types/Provider.php) methods in your own projects!
+```php 
+use ImperaZim\EasyEconomy\EasyEconomy;
+$api = EasyEconomy::getInstance()->getProvider();
+```
+ 
+### EasyEconomy's events
+EasyEconomy provides a number of events that can be used to hook into the plugin's code. Currently, the following events can be used:
+-  [PlayerMoneyUpdateEvent](https://github.com/ImperaZim/EasyEconomy/blob/main/src/ImperaZim/EasyEconomy/event/PlayerMoneyUpdateEvent.php): **Always** called when a player has their **money** amount updated.
+
+-  [PlayerTranferMoneyEvent](https://github.com/ImperaZim/EasyEconomy/blob/main/src/ImperaZim/EasyEconomy/event/PlayerTransferMoneyEvent.php): **Always** called when a player **transfer** money to another player.

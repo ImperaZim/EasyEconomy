@@ -1,0 +1,11 @@
+
+# Select database type (YAML, MYSQL, SQLITE3) #
+database-type: 'yaml'
+
+# MYSQL Settings  #
+database-provinder:
+ host: 51.81.47.131
+ port: 3306
+ user: u720_m5HkgVNSm8
+ password: dZJBsc=3Fno@OsWpY3dB+zpp
+ db: s720_easyeconomy

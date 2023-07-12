@@ -1,0 +1,55 @@
+
+# ==================== #
+prefix: "§l§eECONOMY§r"
+# ==================== #
+
+# Commands About
+commands:
+ money_command: 
+  trigger: 'money'
+  description: 'See your money'
+  aliases: []
+ pay_command:
+  trigger: 'pay'
+  description: 'Send money to another player'
+  aliases: []
+ see_command:
+  trigger: 'see'
+  description: 'View another player`s money'
+  aliases: []
+ set_command:
+  trigger: 'set'
+  description: 'Reset a player`s money'
+  aliases: []
+give_command:
+  trigger: 'give'
+  description: 'Give money to another player'
+  aliases: []
+top_command:
+  trigger: 'top'
+  description: 'See a list of the top 10 richest'
+  aliases: []
+
+# Messages
+messages:
+  default_use: "{perfix} §7Use /money [args...]!"
+  no_permission: "{perfix} §7You are not allowed to do this!"
+  invalid_number: "{prefix} §7Invalid number!"
+  invalid_player: "{prefix} §7The player {player} is not online!" 
+  mymoney:
+    successfully: "{prefix} §7You has {money} $ of money!"
+  moneypay:
+    Insufficient_money: "{prefix} §7Your money is less than what you want to send!" 
+    money_successfully_sent: "{prefix} §7You sent {money} $ to player {target}!"
+    money_successfully_received: "{prefix} §7You received {money} $ from player {player}!"
+  seemoney: 
+    successfully: "{prefix} §7The player {player} has {money} $ of money!"
+  setmoney: 
+    successfully_set_money: "{prefix} §7You set player {target}'s money to {money} $!"
+    successfully_res_money: "{prefix} §7Your money was set to {money} $!"
+  givemoney: 
+    successfully_gave_money: "{prefix} §7You gave {money} $ to player {target}!"
+    successfully_given_money: "{prefix} §7You won {money} $!"
+  topmoney:
+    place_preset: "§e{id}° §7{player} -§a {money} $"
+    title_preset: "{prefix} §7Players leaderboard: \n {place_preset}"
