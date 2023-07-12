@@ -1,0 +1,5 @@
+name: EasyEconomyTycoonAddon
+author: ImperaZim
+version: 1.0.0
+api: 5.0.0
+main: ImperaZim\EasyEconomy\EasyEconomyTycoonAddon
