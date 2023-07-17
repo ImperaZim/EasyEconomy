@@ -19,7 +19,7 @@ class PlayerTransferMoneyEvent extends PlayerEvent {
   }
 
   public function getTarget() : Player {
-    return $this->player;
+    return $this->target;
   }
 
   public function getAmount() : int|float {

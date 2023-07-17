@@ -12,10 +12,9 @@ class PlayerMoneyUpdateEvent extends PlayerEvent {
 
   public function __construct(Player $source) {
     parent::__construct($source);
-    $this->provider = EasyEconomy::getInstance()->getProvider();
   }
   
   public function getNewBalance() : int|float {
-    return $this->provider->getMoney($this->getPlayer());
+    return EasyEconomy::getInstance()->getProvider()->getMoney($this->getPlayer());
   }
 }

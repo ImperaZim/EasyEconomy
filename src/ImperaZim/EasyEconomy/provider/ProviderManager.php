@@ -3,38 +3,58 @@
 namespace ImperaZim\EasyEconomy\provider;
 
 use ImperaZim\EasyEconomy\EasyEconomy;
+use ImperaZim\EasyEconomy\provider\types\Provider;
+use ImperaZim\EasyEconomy\provider\types\yamlProvider;
+use ImperaZim\EasyEconomy\provider\types\MysqlProvider;
+use ImperaZim\EasyEconomy\provider\types\SqliteProvider;
 
 final class ProviderManager {
+  private EasyEconomy $plugin;
 
- public static function getType() : string {
-  return strtoupper(EasyEconomy::getInstance()->getConfig()->get('database-type'));
- }
-
- public static function check_validate() : bool {
-  $type = self::getType();
-  $logger = EasyEconomy::getInstance()->getLogger();
-
-  if (in_array($type, ['SQLITE3', 'MYSQL', 'YAML'])) {
-   $provider = self::open();
-   $provider->createTable();
-   $logger->notice('Database selected: ' . $type . ' type');
-   return true;
-  } else {
-   throw new \InvalidArgumentException('Database error: Database type does not exist!');
-   return false;
+  public function __construct(EasyEconomy $plugin) {
+    $this->plugin = $plugin;
+    $this->plugin->providers = [];
+    $this->register('mysql', new yamlProvider($plugin));
+    $this->register('mysql', new MysqlProvider($plugin));
+    $this->register('sqlite', new SqliteProvider($plugin));
   }
- }
 
- public static function open() {
-  switch (self::getType()) {
-   case 'YAML':
-    return new types\yamlProvider(EasyEconomy::getInstance());
-   case 'MYSQL':
-    return new types\mysqlProvider(EasyEconomy::getInstance());
-   case 'SQLITE3':
-    return new types\sqliteProvider(EasyEconomy::getInstance());
-   default:
-    throw new \InvalidArgumentException('Invalid database type: ' . self::getType());
+  public function register(string $name, DatabaseProvider $provider): void {
+    $this->plugin->providers['database'][strtolower($name)] = $provider;
   }
- }
+
+  public function getProvider(): string {
+    $cfg = $this->plugin->getConfig();
+    return strtoupper($cfg->get('database-type'));
+  }
+
+  public function validate(): bool {
+    $type = $this->getProvider();
+    $logger = $this->plugin->getLogger();
+    try {
+      if (isset($this->providers['database'][$type])) {
+        $provider = $this->providers['database'][$type];
+        if ($provider instanceof Provider) {
+          $this->open()->createTable();
+          $logger->notice('Database provider selected: ' . $provider->name);
+          return true;
+        } else {
+          throw new \InvalidArgumentException('Database error: Provider ' . $type . ' was not registered!');
+        }
+      } else {
+        throw new \InvalidArgumentException('Invalid database provider: ' . $type);
+      }
+    } catch (\InvalidArgumentException $e) {
+      return false;
+    }
+  }
+
+  public function open(): ?Provider {
+    $type = $this->getProvider();
+    if (isset($this->providers['database'][$type])) {
+      return $this->providers['database'][$type];
+    } else {
+      throw new \InvalidArgumentException('Invalid database provider: ' . $type);
+    }
+  }
 }

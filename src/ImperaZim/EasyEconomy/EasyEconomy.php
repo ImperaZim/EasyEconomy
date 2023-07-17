@@ -11,13 +11,16 @@ use CortexPE\Commando\PacketHooker;
 use CortexPE\Commando\exception\HookAlreadyRegistered;
 
 use ImperaZim\EasyEconomy\command\MoneyCommand;
+use ImperaZim\EasyEconomy\provider\types\Provider;
 use ImperaZim\EasyEconomy\provider\ProviderManager;
 
 final class EasyEconomy extends PluginBase implements Listener {
 
+  public array $providers;
+  public ?Provider $database;
   public ?int $initial_money = 0;
   public ?string $directory = null;
-
+  
   protected static ?EasyEconomy $instance = null;
 
   public static function getInstance() : ?EasyEconomy {
@@ -26,11 +29,15 @@ final class EasyEconomy extends PluginBase implements Listener {
 
   public function onLoad() : void {
     self::$instance = $this;
+    $this->saveResource('messages.yml');
   }
 
   public function onEnable() : void {
-    if (ProviderManager::check_validate()) {
-      $this->saveResource('messages.yml');
+    if (($epm = new ProviderManager($this))->validate()) {
+      $this->database = $epm->open();
+    }
+
+    if ($this->database instanceof Provider) {
       $this->registerCommands();
       $this->registerPacketHooker();
       $this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -91,7 +98,7 @@ final class EasyEconomy extends PluginBase implements Listener {
 
   /* API FUNCTIONS */
 
-  public function getProvider() {
-    return ProviderManager::open();
+  public function getProvider() : ?Provider {
+    return $this->database;
   }
 }
