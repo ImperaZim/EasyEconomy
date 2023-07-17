@@ -75,6 +75,7 @@ final class yamlProvider implements Provider {
  public function getAllInOrder() : array {
   $id = 1;
   $table = [];
+  if (!isset($this->getAll()['players'])) return [];
   foreach ($this->getAll()['players'] as $name => $money) {
    if ($id <= 10) {
     $data = [
