@@ -13,6 +13,8 @@ final class sqliteProvider implements Provider {
  private \SQLite3 $table;
 
  const FILE = 'players.db';
+ 
+ public string $database = "sqlite";
 
  public function __construct(EasyEconomy $plugin) {
   $this->money = $plugin->initial_money;

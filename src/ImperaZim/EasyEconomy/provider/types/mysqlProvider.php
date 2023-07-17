@@ -11,6 +11,8 @@ final class mysqlProvider implements Provider {
 
  private int $money;
  private \mysqli $table;
+ 
+ public string $database = "mysql";
 
  public function __construct(EasyEconomy $plugin) {
   $config = $plugin->getConfig()->get("database-provider", []);

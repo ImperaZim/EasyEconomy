@@ -26,7 +26,7 @@ class SoftEnumStore {
 	}
 
 	public static function addEnum(CommandEnum $enum):void {
-		static::$enums[$enum->getName()] = $enum;
+		self::$enums[$enum->getName()] = $enum;
 		self::broadcastSoftEnum($enum, UpdateSoftEnumPacket::TYPE_ADD);
 	}
 
@@ -42,7 +42,7 @@ class SoftEnumStore {
 		if(($enum = self::getEnumByName($enumName)) === null){
 			throw new CommandoException("Unknown enum named " . $enumName);
 		}
-		unset(static::$enums[$enumName]);
+		unset(self::$enums[$enumName]);
 		self::broadcastSoftEnum($enum, UpdateSoftEnumPacket::TYPE_REMOVE);
 	}
 
@@ -55,6 +55,9 @@ class SoftEnumStore {
 	}
 
 	private static function broadcastPacket(ClientboundPacket $pk):void {
-		($sv = Server::getInstance())->broadcastPackets($sv->getOnlinePlayers(), [$pk]);
+		$sv = Server::getInstance();
+		foreach ($sv->getOnlinePlayers() as $p) {
+		  $p->getNetworkSession()->sendDataPacket($pk);
+		}
 	}
 }

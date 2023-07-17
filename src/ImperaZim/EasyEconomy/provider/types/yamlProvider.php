@@ -13,6 +13,8 @@ final class yamlProvider implements Provider {
  private Config $table;
 
  const FILE = 'players.yml';
+ 
+ public string $database = "yaml";
 
  public function __construct(EasyEconomy $plugin) {
   $this->money = $plugin->initial_money;
