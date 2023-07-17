@@ -12,8 +12,6 @@ final class mysqlProvider implements Provider {
  private int $money;
  private \mysqli $table;
  
- public string $database = "mysql";
-
  public function __construct(EasyEconomy $plugin) {
   $config = $plugin->getConfig()->get("database-provider", []);
   $this->table = new \mysqli(
@@ -26,6 +24,11 @@ final class mysqlProvider implements Provider {
   $this->money = $plugin->initial_money;
  }
 
+ 
+ public function getName() : string {
+  return "mysql";
+ }
+ 
  public function createTable() : void {
   $this->table->query("CREATE TABLE IF NOT EXISTS profile(name TEXT, money INT)");
  }

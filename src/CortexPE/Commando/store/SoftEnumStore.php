@@ -15,14 +15,14 @@ class SoftEnumStore {
 	private static array $enums = [];
 
 	public static function getEnumByName(string $name):?CommandEnum {
-		return static::$enums[$name] ?? null;
+		return self::$enums[$name] ?? null;
 	}
 
 	/**
 	 * @return CommandEnum[]
 	 */
 	public static function getEnums(): array {
-		return static::$enums;
+		return self::$enums;
 	}
 
 	public static function addEnum(CommandEnum $enum):void {

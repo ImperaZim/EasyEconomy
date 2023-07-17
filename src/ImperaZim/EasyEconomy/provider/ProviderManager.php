@@ -36,7 +36,7 @@ final class ProviderManager {
         $provider = $this->providers['database'][$type];
         if ($provider instanceof Provider) {
           $this->open()->createTable();
-          $logger->notice('Database provider selected: ' . $provider->database);
+          $logger->notice('Database provider selected: ' . $provider->getName());
           return true;
         } else {
           throw new \InvalidArgumentException('Database error: Provider ' . $type . ' was not registered!');
