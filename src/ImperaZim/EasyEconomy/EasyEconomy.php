@@ -33,11 +33,7 @@ final class EasyEconomy extends PluginBase implements Listener {
   }
 
   public function onEnable() : void {
-    if (($epm = new ProviderManager($this))->validate()) {
-      $this->database = $epm->open();
-    }
-
-    if ($this->database instanceof Provider) {
+    if ((new ProviderManager($this))->validate()) {
       $this->registerCommands();
       $this->registerPacketHooker();
       $this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -99,6 +95,7 @@ final class EasyEconomy extends PluginBase implements Listener {
   /* API FUNCTIONS */
 
   public function getProvider() : ?Provider {
-    return $this->database;
+    $provider = new ProviderManager($this);
+    return $provider->open();
   }
 }

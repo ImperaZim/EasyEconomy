@@ -14,9 +14,11 @@ final class ProviderManager {
   public function __construct(EasyEconomy $plugin) {
     $this->plugin = $plugin;
     $this->plugin->providers = [];
-    $this->register('mysql', new yamlProvider($plugin));
-    $this->register('mysql', new mysqlProvider($plugin));
+    $this->register('yaml', new yamlProvider($plugin));
     $this->register('sqlite', new sqliteProvider($plugin));
+    if ($this->getProvider() === "mysql") {
+     $this->register('mysql', new mysqlProvider($plugin));
+    }
   }
 
   public function register(string $name, Provider $provider): void {
@@ -25,15 +27,15 @@ final class ProviderManager {
 
   public function getProvider(): string {
     $cfg = $this->plugin->getConfig();
-    return strtoupper($cfg->get('database-type'));
+    return strtolower($cfg->get('database-type'));
   }
 
   public function validate(): bool {
     $type = $this->getProvider();
     $logger = $this->plugin->getLogger();
     try {
-      if (isset($this->providers['database'][$type])) {
-        $provider = $this->providers['database'][$type];
+      if (isset($this->plugin->providers['database'][$type])) {
+        $provider = $this->plugin->providers['database'][$type];
         if ($provider instanceof Provider) {
           $this->open()->createTable();
           $logger->notice('Database provider selected: ' . $provider->getName());
@@ -51,8 +53,8 @@ final class ProviderManager {
 
   public function open(): ?Provider {
     $type = $this->getProvider();
-    if (isset($this->providers['database'][$type])) {
-      return $this->providers['database'][$type];
+    if (isset($this->plugin->providers['database'][$type])) {
+      return $this->plugin->providers['database'][$type];
     } else {
       throw new \InvalidArgumentException('Invalid database provider: ' . $type);
     }
