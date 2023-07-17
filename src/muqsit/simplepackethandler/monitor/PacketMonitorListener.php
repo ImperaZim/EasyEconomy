@@ -44,8 +44,8 @@ final class PacketMonitorListener implements IPacketMonitor{
 	private array $outgoing_handlers = [];
 
 	public function __construct(
-		readonly private Plugin $register,
-		readonly private bool $handle_cancelled
+	 private Plugin $register,
+	 private bool $handle_cancelled
 	){}
 
 	public function monitorIncoming(Closure $handler) : IPacketMonitor{
