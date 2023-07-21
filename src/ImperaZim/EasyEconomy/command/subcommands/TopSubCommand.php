@@ -26,7 +26,7 @@ class TopSubCommand extends BaseSubCommand {
     $list .= EasyEconomy::getProcessedTags(
      [
        '{id}' => $data['id'],
-       '{player}' => $data['player'],
+       '{player}' => $data['name'],
        '{money}' => $data['money']
      ],
      $plugin->getMessages()->getNested("messages.topmoney.place_preset") . "\n");

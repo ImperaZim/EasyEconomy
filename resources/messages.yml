@@ -32,8 +32,8 @@ top_command:
 
 # Messages
 messages:
-  default_use: "{perfix} §7Use /money [args...]!"
-  no_permission: "{perfix} §7You are not allowed to do this!"
+  default_use: "{prefix} §7Use /{trigger} [args...]!"
+  no_permission: "{prefix} §7You are not allowed to do this!"
   invalid_number: "{prefix} §7Invalid number!"
   invalid_player: "{prefix} §7The player {player} is not online!" 
   mymoney:
@@ -51,5 +51,5 @@ messages:
     successfully_gave_money: "{prefix} §7You gave {money} $ to player {target}!"
     successfully_given_money: "{prefix} §7You won {money} $!"
   topmoney:
-    place_preset: "§e{id}° §7{player} -§a {money} $"
-    title_preset: "{prefix} §7Players leaderboard: \n {place_preset}"
+    place_preset: " §e{id}° §7{player} -§a {money} $"
+    title_preset: "{prefix} §7Players leaderboard: \n{place_preset}"

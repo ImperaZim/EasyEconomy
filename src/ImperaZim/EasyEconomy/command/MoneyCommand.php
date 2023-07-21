@@ -81,8 +81,11 @@ class MoneyCommand extends BaseCommand {
 
   public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void {
     $plugin = EasyEconomy::getInstance();
+    $config = EasyEconomy::getInstance()->getMessages();
     if (!$sender instanceof Player) {
-      $tags = [];
+      $tags = [
+        "{trigger}" => $config->getNested('commands.money_command.trigger', 'money')
+      ];
       $sender->sendMessage(EasyEconomy::getProcessedTags($tags, $plugin->getMessages()->getNested("messages.default_use")));
       return;
     }

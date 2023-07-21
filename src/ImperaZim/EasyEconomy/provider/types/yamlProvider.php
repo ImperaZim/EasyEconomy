@@ -24,7 +24,11 @@ final class yamlProvider implements Provider {
   }
 
   public function createTable() : void {
-    // There is no need to implement this method for YAML.
+    if (!isset($this->getAll()['players'])) {
+      $config = $this->table;
+      $config->setNested('players', []);
+      $config->save();
+    }
   }
 
   public function createProfile(Player $player) : bool {
@@ -81,19 +85,25 @@ final class yamlProvider implements Provider {
     $table = [];
     if (!isset($this->getAll()['players'])) return [];
     foreach ($this->getAll()['players'] as $name => $money) {
-      if ($id <= 10) {
-        $data = [
-          'id' => $id,
-          'name' => $name,
-          'money' => $money,
-        ];
-        $table[$money + $id] = $data;
-        $id++;
-      } else {
+      $data = [
+        'id' => $id,
+        'name' => $name,
+        'money' => $money,
+      ];
+      $table[$money + $id] = $data;
+      $id++;
+    }
+    krsort($table);
+    $list = $table;
+    $table = [];
+    foreach ($list as $hash => $data) {
+      if ($id < 11) {
+       $table[$hash] = $data;
+       $id = $id + 1;
+      }else{
         break;
       }
     }
-    krsort($table);
     return $table;
   }
 
